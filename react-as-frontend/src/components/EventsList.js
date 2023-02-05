@@ -9,6 +9,7 @@ function EventsList({ events }) {
           <h3>{event.title}</h3>
           <p>{event.description.substring(0, 150)}</p>
           <p>{event.date}</p>
+          <hr />
         </div>
       ))}
     </div>
