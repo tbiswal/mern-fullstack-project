@@ -1,4 +1,4 @@
-import React from 'react';
+import { React, useState } from 'react';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
@@ -8,16 +8,19 @@ import EventsListPage from './pages/EventsListPage';
 import NavBar from './NavBar';
 import NotFoundPage from './pages/NotFoundPage';
 import CreateEventPage from './pages/CreateEventPage';
+import DYMMY_EVENTS from './pages/event-content';
 
 function App() {
+  const [events, setEvents] = useState(DYMMY_EVENTS);
+
   const addEventHandler = (enteredEventdata) => {
-    console.log(enteredEventdata);
     const eventData = {
       ...enteredEventdata,
       id: Math.random().toString(),
     };
 
-    console.log(eventData);
+    // Updating the old snapots of events
+    setEvents((prevEvents) => [eventData, ...prevEvents]);
   };
 
   return (
@@ -27,7 +30,7 @@ function App() {
         <div id="page-body">
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/event-list" element={<EventsListPage />} />
+            <Route path="/event-list" element={<EventsListPage eventlist={events} />} />
             <Route
               path="/create-event"
               element={<CreateEventPage onAddEvent={addEventHandler} />}

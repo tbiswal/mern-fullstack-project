@@ -18,6 +18,7 @@ function EventsList({ events }) {
 
 EventsList.propTypes = [
   {
+    id: PropTypes.string,
     title: PropTypes.string,
     description: PropTypes.string,
     date: PropTypes.string,
