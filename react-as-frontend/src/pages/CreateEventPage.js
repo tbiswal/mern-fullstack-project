@@ -1,32 +1,51 @@
 import { React, useState } from 'react';
+import PropTypes from 'prop-types';
+
 // import { useNavigate } from 'react-router-dom';
 // import events from './event-content';
 
-function CreateEventPage() {
-//   const navigate = useNavigate();
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [date, setDate] = useState('');
+function CreateEventPage(props) {
+  const { onAddEvent } = props;
+  //   const navigate = useNavigate();
+  const [enteredTitle, setEnteredTitle] = useState('');
+  const [enteredDescription, setEnteredDescription] = useState('');
+  const [enteredDate, setEnteredDate] = useState('');
 
-  const createEvent = async () => {
-    console.log([title, description, date]);
+  const createEvent = () => {
+    const eventData = {
+      title: enteredTitle,
+      description: enteredDescription,
+      date: enteredDate,
+    };
+
+    onAddEvent(eventData);
   };
 
   return (
     <>
       <h1>Create Event</h1>
-      <input placeholder="Event Title" value={title} onChange={(e) => setTitle(e.target.value)} />
+      <input
+        placeholder="Event Title"
+        value={enteredTitle}
+        onChange={(e) => setEnteredTitle(e.target.value)}
+      />
       <input
         placeholder="Event Description"
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
+        value={enteredDescription}
+        onChange={(e) => setEnteredDescription(e.target.value)}
       />
-      <input placeholder="Event Date yyyy-mm-dd" value={date} onChange={(e) => setDate(e.target.value)} />
+      <input
+        placeholder="Event Date yyyy-mm-dd"
+        value={enteredDate}
+        onChange={(e) => setEnteredDate(e.target.value)}
+      />
       <button id="create-event-btn" onClick={createEvent} type="submit">
         Create Event
       </button>
     </>
   );
 }
+
+CreateEventPage.propTypes = { onAddEvent: PropTypes.func.isRequired };
 
 export default CreateEventPage;

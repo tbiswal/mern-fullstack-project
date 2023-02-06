@@ -10,6 +10,16 @@ import NotFoundPage from './pages/NotFoundPage';
 import CreateEventPage from './pages/CreateEventPage';
 
 function App() {
+  const addEventHandler = (enteredEventdata) => {
+    console.log(enteredEventdata);
+    const eventData = {
+      ...enteredEventdata,
+      id: Math.random().toString(),
+    };
+
+    console.log(eventData);
+  };
+
   return (
     <BrowserRouter>
       <div className="App">
@@ -18,7 +28,10 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/event-list" element={<EventsListPage />} />
-            <Route path="/create-event" element={<CreateEventPage />} />
+            <Route
+              path="/create-event"
+              element={<CreateEventPage onAddEvent={addEventHandler} />}
+            />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </div>
