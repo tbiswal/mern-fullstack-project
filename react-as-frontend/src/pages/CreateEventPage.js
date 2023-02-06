@@ -1,12 +1,10 @@
 import { React, useState } from 'react';
 import PropTypes from 'prop-types';
-
-// import { useNavigate } from 'react-router-dom';
-// import events from './event-content';
+import { useNavigate } from 'react-router-dom';
 
 function CreateEventPage(props) {
   const { onAddEvent } = props;
-  //   const navigate = useNavigate();
+    const navigate = useNavigate();
   const [enteredTitle, setEnteredTitle] = useState('');
   const [enteredDescription, setEnteredDescription] = useState('');
   const [enteredDate, setEnteredDate] = useState('');
@@ -19,6 +17,7 @@ function CreateEventPage(props) {
     };
 
     onAddEvent(eventData);
+    navigate('/event-list');
   };
 
   return (
