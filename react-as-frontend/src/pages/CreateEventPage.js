@@ -28,13 +28,13 @@ function CreateEventPage(props) {
         value={enteredTitle}
         onChange={(e) => setEnteredTitle(e.target.value)}
       />
-      <input
+      <textarea
         placeholder="Event Description"
         value={enteredDescription}
         onChange={(e) => setEnteredDescription(e.target.value)}
       />
       <input
-        placeholder="Event Date yyyy-mm-dd"
+        placeholder="Event Date YYYY-MM-DD"
         value={enteredDate}
         onChange={(e) => setEnteredDate(e.target.value)}
       />
