@@ -7,6 +7,7 @@ import HomePage from './pages/HomePage';
 import EventsListPage from './pages/EventsListPage';
 import NavBar from './NavBar';
 import NotFoundPage from './pages/NotFoundPage';
+import CreateEventPage from './pages/CreateEventPage';
 
 function App() {
   return (
@@ -16,7 +17,8 @@ function App() {
         <div id="page-body">
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/events" element={<EventsListPage />} />
+            <Route path="/event-list" element={<EventsListPage />} />
+            <Route path="/create-event" element={<CreateEventPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </div>
