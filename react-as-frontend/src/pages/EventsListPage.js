@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import EventsList from '../components/EventsList';
-// import DYMMY_EVENTS from './event-content';
 
 function EventsListPage(props) {
   const { eventlist } = props;

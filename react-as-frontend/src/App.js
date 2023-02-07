@@ -1,4 +1,5 @@
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
+import axios from 'axios';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
@@ -8,10 +9,19 @@ import EventsListPage from './pages/EventsListPage';
 import NavBar from './NavBar';
 import NotFoundPage from './pages/NotFoundPage';
 import CreateEventPage from './pages/CreateEventPage';
-import DYMMY_EVENTS from './pages/event-content';
 
 function App() {
-  const [events, setEvents] = useState(DYMMY_EVENTS);
+  const [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    const loadEvents = async () => {
+      const response = await axios.get('/events');
+      const eventInfo = response.data;
+      setEvents(eventInfo);
+    };
+
+    loadEvents();
+  }, []);
 
   const addEventHandler = (enteredEventdata) => {
     const eventData = {
