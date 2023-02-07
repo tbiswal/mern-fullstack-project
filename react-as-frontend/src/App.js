@@ -15,7 +15,7 @@ function App() {
 
   useEffect(() => {
     const loadEvents = async () => {
-      const response = await axios.get('/events');
+      const response = await axios.get('/api/events');
       const eventInfo = response.data;
       setEvents(eventInfo);
     };

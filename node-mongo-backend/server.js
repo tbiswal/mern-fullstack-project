@@ -1,8 +1,19 @@
-const express = require('express');
-const morgan = require('morgan');
+import express from 'express';
+import morgan from 'morgan';
+import path from 'path';
+
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
-const port = 3001;
+app.use(express.json());
+app.use(express.static(path.join(__dirname, '../react-as-frontend/build')));
+
+app.get(/^(?!\/api).+/, (req, res) => {
+  res.sendFile(path.join(__dirname, '../react-as-frontend/build/index.html'));
+});
+
 const events = [
   {
     id: '1',
@@ -27,14 +38,12 @@ const events = [
 app.use(morgan('tiny'));
 app.use(express.json());
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
-
-app.get('/events', (req, res) => {
+app.get('/api/events', (req, res) => {
   res.send(events);
 });
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+const PORT = process.env.PORT || 8000;
+
+app.listen(PORT, () => {
+  console.log(`Example app listening on port ${PORT}`);
 });
