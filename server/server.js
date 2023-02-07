@@ -9,10 +9,10 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 app.use(express.json());
-app.use(express.static(path.join(__dirname, '../react-as-frontend/build')));
+app.use(express.static(path.join(__dirname, '../client/build')));
 
 app.get(/^(?!\/api).+/, (req, res) => {
-  res.sendFile(path.join(__dirname, '../react-as-frontend/build/index.html'));
+  res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
 
 const events = [
