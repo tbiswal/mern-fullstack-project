@@ -10,12 +10,16 @@ import NavBar from './NavBar';
 import NotFoundPage from './pages/NotFoundPage';
 import CreateEventPage from './pages/CreateEventPage';
 
+const axiosInstance = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
+});
+
 function App() {
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
     const loadEvents = async () => {
-      const response = await axios.get('/api/events');
+      const response = await axiosInstance.get('/api/events');
       const eventInfo = response.data;
       setEvents(eventInfo);
     };
