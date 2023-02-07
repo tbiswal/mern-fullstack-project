@@ -33,6 +33,12 @@ const events = [
     description: 'Participate and win 3000$',
     date: '2023-02-23',
   },
+  {
+    id: '4',
+    title: 'PHP Hackathon',
+    description: 'Participate and win 1000$',
+    date: '2023-04-23',
+  },
 ];
 
 app.use(morgan('tiny'));
