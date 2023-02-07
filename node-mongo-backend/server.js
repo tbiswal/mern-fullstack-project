@@ -61,7 +61,9 @@ if (process.env.NODE_ENV === 'production') {
     );
   });
 } else {
-  console.log('Not getting NODE_ENV!');
+  app.get('/', (req, res) => {
+    res.send('Not getting NODE_ENV!');
+  });
 }
 
 const PORT = process.env.PORT || 8000;
