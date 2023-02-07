@@ -9,11 +9,11 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 app.use(express.json());
-// app.use(express.static(path.join(__dirname, '../react-as-frontend/build')));
+app.use(express.static(path.join(__dirname, '../react-as-frontend/build')));
 
-// app.get(/^(?!\/api).+/, (req, res) => {
-//   res.sendFile(path.join(__dirname, '../react-as-frontend/build/index.html'));
-// });
+app.get(/^(?!\/api).+/, (req, res) => {
+  res.sendFile(path.join(__dirname, '../react-as-frontend/build/index.html'));
+});
 
 const events = [
   {
@@ -51,23 +51,17 @@ app.get('/api/events', (req, res) => {
   res.send(events);
 });
 
-if (process.env.NODE_ENV === 'production') {
-  app.get('/', (req, res) => {
-    app.use(
-      express.static(path.resolve(__dirname, '../react-as-frontend', 'build'))
-    );
-    res.sendFile(
-      path.resolve(__dirname, '../react-as-frontend', 'build', 'index.html')
-    );
-  });
-} else {
-  app.get('/', (req, res) => {
-    res.send('Not getting NODE_ENV!');
-  });
-}
+// if(process.env.NODE_ENV=='production'){
+//   const path = require('path')
+
+//   app.get('/',(req,res)=>{
+//       app.use(express.static(path.resolve(__dirname,'client','build')))
+//       res.sendFile(path.resolve(__dirname,'client','build','index.html'))
+//   })
+// }
 
 const PORT = process.env.PORT || 8000;
 
 app.listen(PORT, () => {
-  console.log('server running on ', PORT);
+  console.log('Server is listening on port ' + PORT);
 });
