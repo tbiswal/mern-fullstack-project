@@ -49,4 +49,4 @@ Assume you manage an Event Management company that owns a venue where events can
 7. Integrate BitBucket PIpelines to handle your build
 8. Integrate your automated tests into your build and automatically produce a report that includes code coverage
 9. Update BitBucket to package your code as a Docker image
-10. Update BitBucket to deploy your Docker image to AWS
+10. Update BitBucket to deploy your Docker image to AWS 
