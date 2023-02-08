@@ -11,7 +11,7 @@ import NotFoundPage from './pages/NotFoundPage';
 import CreateEventPage from './pages/CreateEventPage';
 
 const axiosInstance = axios.create({
-  baseURL: 'https://mern-app-xox2.onrender.com',
+  baseURL: process.env.REACT_APP_API_URL,
 });
 
 function App() {
