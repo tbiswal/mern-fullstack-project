@@ -28,13 +28,13 @@ function App() {
   }, []);
 
   const addEventHandler = (enteredEventdata) => {
-    const eventData = {
+    const newEvent = {
       ...enteredEventdata,
       id: Math.random().toString(),
     };
 
-    // Updating the old snapots of events
-    setEvents((prevEvents) => [eventData, ...prevEvents]);
+    // Merge existing event with new eventusing spread operator
+    setEvents([newEvent, ...events]);
   };
 
   return (
