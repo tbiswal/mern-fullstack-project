@@ -41,6 +41,15 @@ app.get('/api/events', (req, res) => {
   res.send(events);
 });
 
+app.post('/api/events', (req, res) => {
+  const id = Math.random().toString();
+  const { title, description, date } = req.body;
+  const newEvent = { id, title, description, date };
+
+  events.unshift(newEvent);
+  res.send(newEvent);
+});
+
 const PORT = process.env.PORT || 8000;
 
 app.listen(PORT, () => {

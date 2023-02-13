@@ -1,5 +1,4 @@
-import { React, useState, useEffect } from 'react';
-import axios from 'axios';
+import { React } from 'react';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
@@ -10,33 +9,7 @@ import NavBar from './NavBar';
 import NotFoundPage from './pages/NotFoundPage';
 import CreateEventPage from './pages/CreateEventPage';
 
-const axiosInstance = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
-});
-
 function App() {
-  const [events, setEvents] = useState([]);
-
-  useEffect(() => {
-    const loadEvents = async () => {
-      const response = await axiosInstance.get('/api/events');
-      const eventInfo = response.data;
-      setEvents(eventInfo);
-    };
-
-    loadEvents();
-  }, []);
-
-  const addEventHandler = (enteredEventdata) => {
-    const newEvent = {
-      ...enteredEventdata,
-      id: Math.random().toString(),
-    };
-
-    // Merge existing event with new eventusing spread operator
-    setEvents([newEvent, ...events]);
-  };
-
   return (
     <BrowserRouter>
       <div className="App">
@@ -44,11 +17,8 @@ function App() {
         <div id="page-body">
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/event-list" element={<EventsListPage eventlist={events} />} />
-            <Route
-              path="/create-event"
-              element={<CreateEventPage onAddEvent={addEventHandler} />}
-            />
+            <Route path="/event-list" element={<EventsListPage />} />
+            <Route path="/create-event" element={<CreateEventPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </div>

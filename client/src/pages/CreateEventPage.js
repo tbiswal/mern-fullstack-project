@@ -1,22 +1,26 @@
 import { React, useState } from 'react';
-import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
-function CreateEventPage(props) {
-  const { onAddEvent } = props;
-    const navigate = useNavigate();
+const axiosInstance = axios.create({
+  baseURL: process.env.REACT_APP_API_URL,
+});
+
+function CreateEventPage() {
+  const navigate = useNavigate();
   const [enteredTitle, setEnteredTitle] = useState('');
   const [enteredDescription, setEnteredDescription] = useState('');
   const [enteredDate, setEnteredDate] = useState('');
 
-  const createEvent = () => {
+  const createEvent = async () => {
     const eventData = {
       title: enteredTitle,
       description: enteredDescription,
       date: enteredDate,
     };
 
-    onAddEvent(eventData);
+    await axiosInstance.post('/api/events', eventData);
+
     navigate('/event-list');
   };
 
@@ -44,7 +48,5 @@ function CreateEventPage(props) {
     </>
   );
 }
-
-CreateEventPage.propTypes = { onAddEvent: PropTypes.func.isRequired };
 
 export default CreateEventPage;
