@@ -38,7 +38,7 @@ function CreateEventPage() {
         onChange={(e) => setEnteredDescription(e.target.value)}
       />
       <input
-        placeholder="Event Date YYYY-MM-DD"
+        type="date"
         value={enteredDate}
         onChange={(e) => setEnteredDate(e.target.value)}
       />
