@@ -2,13 +2,16 @@ import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 import mongoose from 'mongoose';
-import { Event } from './models/event.js';
 import * as dotenv from 'dotenv';
+import {router as eventApi} from './routes/eventApi.js';
 
-dotenv.config()
+dotenv.config();
 
 const app = express();
 app.use(express.json());
+app.use(morgan('tiny'));
+app.use(cors());
+app.use('/', eventApi);
 
 const username = process.env.DB_USER;
 const password = process.env.DB_PASS;
@@ -31,23 +34,6 @@ mongoose
     console.log('CONNECION ERROR!');
     console.log(err);
   });
-
-app.use(morgan('tiny'));
-app.use(cors());
-
-app.use(express.json());
-
-app.get('/api/events', async (req, res) => {
-  const events = await Event.find({}).sort({ _id: -1 });
-  res.send(events);
-});
-
-app.post('/api/events', async (req, res) => {
-  const newEvent = new Event(req.body);
-  await newEvent.save();
-  console.log(newEvent);
-  res.send(newEvent);
-});
 
 const PORT = process.env.PORT || 8000;
 
