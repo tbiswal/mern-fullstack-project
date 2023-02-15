@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
-import { Event } from './models/event.js';
 import * as dotenv from 'dotenv';
+import Event from './models/event.js';
 
 dotenv.config();
 

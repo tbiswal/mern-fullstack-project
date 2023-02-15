@@ -15,4 +15,4 @@ router.post('/api/events', async (req, res) => {
   res.send(newEvent);
 });
 
-export { router };
+export default router;

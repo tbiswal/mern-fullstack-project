@@ -3,7 +3,7 @@ import morgan from 'morgan';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import * as dotenv from 'dotenv';
-import {router as eventApi} from './routes/eventApi.js';
+import router from './routes/eventApi.js';
 
 dotenv.config();
 
@@ -11,7 +11,7 @@ const app = express();
 app.use(express.json());
 app.use(morgan('tiny'));
 app.use(cors());
-app.use('/', eventApi);
+app.use('/', router);
 
 const username = process.env.DB_USER;
 const password = process.env.DB_PASS;
