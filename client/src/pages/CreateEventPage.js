@@ -1,6 +1,7 @@
 import { React, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import useUser from '../hooks/useUser';
 
 const axiosInstance = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
@@ -11,6 +12,7 @@ function CreateEventPage() {
   const [enteredTitle, setEnteredTitle] = useState('');
   const [enteredDescription, setEnteredDescription] = useState('');
   const [enteredDate, setEnteredDate] = useState('');
+  const { user } = useUser();
 
   const createEvent = async () => {
     const eventData = {
@@ -37,14 +39,14 @@ function CreateEventPage() {
         value={enteredDescription}
         onChange={(e) => setEnteredDescription(e.target.value)}
       />
-      <input
-        type="date"
-        value={enteredDate}
-        onChange={(e) => setEnteredDate(e.target.value)}
-      />
-      <button id="create-event-btn" onClick={createEvent} type="submit">
-        Create Event
-      </button>
+      <input type="date" value={enteredDate} onChange={(e) => setEnteredDate(e.target.value)} />
+      {user ? (
+        <button id="create-event-btn" onClick={createEvent} type="submit">
+          Create Event
+        </button>
+      ) : (
+        <button type="button">Log in to create event</button>
+      )}
     </>
   );
 }
