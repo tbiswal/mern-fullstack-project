@@ -7,7 +7,7 @@ button {
   padding: 16px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 16px;
-  background-color: black;
+  background-color: #1976D2;
   color: white;
   border-radius: 8px;
   cursor: pointer;
@@ -18,7 +18,7 @@ h3, h4 {
 }
 
 nav {
-  border-bottom: 4px solid black;
+  border-bottom: 4px solid #1976D2;
   text-align: center;
   position: fixed;
   top: 0;
@@ -40,13 +40,13 @@ nav li {
 
 nav a {
   text-decoration: none;
-  color: black;
+  color: #1976D2;
   font-weight: bold;
   padding: 24px 32px;
 }
 
 nav a:hover {
-  background: black;
+  background: #1976D2;
   color: white;
 }
 
@@ -63,7 +63,7 @@ input, textarea {
   border-radius: 8px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 18px;
-  border: 2px solid black;
+  border: 2px solid #1976D2;
   margin: 16px;
 }
 
