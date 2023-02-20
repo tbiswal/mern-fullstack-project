@@ -6,17 +6,15 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyCFVPuMe07w88hzUctYUUp1OBRIajgZGfY',
-  authDomain: 'my-mern-project-6af48.firebaseapp.com',
-  projectId: 'my-mern-project-6af48',
-  storageBucket: 'my-mern-project-6af48.appspot.com',
-  messagingSenderId: '786423982418',
-  appId: '1:786423982418:web:f780f2ff7322a59028b28b',
+  apiKey: process.env.REACT_APP_FB_API_KEY,
+  authDomain: process.env.REACT_APP_FB_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_FB_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FB_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FB_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FB_APP_ID,
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-console.log(app);
+initializeApp(firebaseConfig);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
