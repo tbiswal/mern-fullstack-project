@@ -21,8 +21,10 @@ function CreateEventPage() {
       date: enteredDate,
     };
 
-    await axiosInstance.post('/api/events', eventData);
+    const token = user && (await user.getIdToken());
+    const headers = token ? { authtoken: token } : {};
 
+    await axiosInstance.post('/api/events', eventData, { headers });
     navigate('/event-list');
   };
 
@@ -45,7 +47,14 @@ function CreateEventPage() {
           Create Event
         </button>
       ) : (
-        <button type="button">Log in to create event</button>
+        <button
+          type="button"
+          onClick={() => {
+            navigate('/login');
+          }}
+        >
+          Log in to create event
+        </button>
       )}
     </>
   );

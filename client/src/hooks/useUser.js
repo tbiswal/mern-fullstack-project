@@ -6,17 +6,13 @@ const useUser = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(
-      getAuth(),
-      (loggedInUser) => {
-        setUser(loggedInUser);
-        setIsLoading(false);
-      },
-      []
-    );
+    const unsubscribe = onAuthStateChanged(getAuth(), (data) => {
+      setUser(data);
+      setIsLoading(false);
+    });
 
     return unsubscribe;
-  });
+  }, []);
 
   return { user, isLoading };
 };
