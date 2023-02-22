@@ -1,7 +1,8 @@
 import fs from 'fs';
 import admin from 'firebase-admin';
 import express from 'express';
-import createEventController from '../controllers/createEventController.js';
+import createEventController from '../controllers/events/createEventController.js';
+import fetchEventController from '../controllers/events/fetchEventController.js';
 import createEventPersistence from '../injectables/events/createEventPersistence.js';
 import fetchEventPersistence from '../injectables/events/fetchEventPersistence.js';
 
@@ -12,7 +13,7 @@ const router = express.Router();
 router.get(
   '/api/events',
   wrapAsync(async (req, res) => {
-    const events = await fetchEventPersistence();
+    const events = await fetchEventController({ fetchEventPersistence });
     res.send(events);
   })
 );

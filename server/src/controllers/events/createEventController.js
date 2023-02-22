@@ -1,4 +1,4 @@
-import CreateEventDTO from '../dto/events/CreateEventDTO.js';
+import CreateEventDTO from '../../dto/events/CreateEventDTO.js';
 
 const createEventController = async (
   { createEventPersistence },
