@@ -1,12 +1,12 @@
-import fs from 'fs';
-import admin from 'firebase-admin';
+// import fs from 'fs';
+// import admin from 'firebase-admin';
 import express from 'express';
 import createEventController from '../controllers/events/createEventController.js';
 import fetchEventController from '../controllers/events/fetchEventController.js';
 import createEventPersistence from '../injectables/events/createEventPersistence.js';
 import fetchEventPersistence from '../injectables/events/fetchEventPersistence.js';
-
 import wrapAsync from '../utils/wrapAsync.js';
+import authMiddleware from '../middlewares/authMiddleware.js';
 
 const router = express.Router();
 
@@ -18,33 +18,7 @@ router.get(
   })
 );
 
-// const credentials = JSON.parse(fs.readFileSync('./credentials.json'));
-
-// if (admin.apps.length === 0) {
-//   admin.initializeApp({
-//     credential: admin.credential.cert(credentials),
-//   });
-// }
-
-// router.use(async (req, res, next) => {
-//   const { authtoken } = req.headers;
-
-//   if (authtoken) {
-//     try {
-//       req.user = (await admin.auth().verifyIdToken(authtoken)) || {};
-
-//       console.log(req.user);
-//     } catch (e) {
-//       res.sendStatus(400);
-//     }
-
-//     if (req.user) {
-//       next();
-//     } else {
-//       res.sendStatus(401);
-//     }
-//   }
-// });
+authMiddleware();
 
 router.post(
   '/api/events',
