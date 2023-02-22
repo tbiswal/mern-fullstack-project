@@ -1,5 +1,3 @@
-// import fs from 'fs';
-// import admin from 'firebase-admin';
 import express from 'express';
 import createEventController from '../controllers/events/createEventController.js';
 import fetchEventController from '../controllers/events/fetchEventController.js';
