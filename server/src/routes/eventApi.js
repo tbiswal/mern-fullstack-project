@@ -1,17 +1,21 @@
 import fs from 'fs';
 import admin from 'firebase-admin';
 import express from 'express';
-import Event from '../models/event.js';
 import createEventController from '../controllers/createEventController.js';
 import createEventPersistence from '../injectables/events/createEventPersistence.js';
+import fetchEventPersistence from '../injectables/events/fetchEventPersistence.js';
+
 import wrapAsync from '../utils/wrapAsync.js';
 
 const router = express.Router();
 
-router.get('/api/events', async (req, res) => {
-  const events = await Event.find({}).sort({ _id: -1 });
-  res.send(events);
-});
+router.get(
+  '/api/events',
+  wrapAsync(async (req, res) => {
+    const events = await fetchEventPersistence();
+    res.send(events);
+  })
+);
 
 // const credentials = JSON.parse(fs.readFileSync('./credentials.json'));
 
