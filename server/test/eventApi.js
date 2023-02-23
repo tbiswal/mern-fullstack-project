@@ -8,8 +8,8 @@ process.env.NODE_ENV = 'test';
 chai.should();
 chai.use(chaiHttp);
 
-describe('Test GET route /api/tasks', () => {
-  it('It should return all tasks', (done) => {
+describe('Test GET route /api/events', () => {
+  it('It should return all events', (done) => {
     chai
       .request(server)
       .get('/api/events')
