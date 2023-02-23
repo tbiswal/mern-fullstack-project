@@ -3,6 +3,7 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import Event from '../src/models/event.js';
 import server from '../src/server.js';
+import createSeeds from '../src/seeds.js';
 
 process.env.NODE_ENV = 'test';
 
@@ -10,7 +11,7 @@ chai.should();
 chai.use(chaiHttp);
 
 before((done) => {
-  Event.deleteMany({}, (err) => {});
+  createSeeds();
   done();
 });
 
