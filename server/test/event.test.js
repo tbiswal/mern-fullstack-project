@@ -1,12 +1,23 @@
-import { describe, it } from 'mocha';
+import { describe, it, before, after } from 'mocha';
 import chai from 'chai';
 import chaiHttp from 'chai-http';
+import Event from '../src/models/event.js';
 import server from '../src/server.js';
 
 process.env.NODE_ENV = 'test';
 
 chai.should();
 chai.use(chaiHttp);
+
+before((done) => {
+  Event.deleteMany({}, (err) => {});
+  done();
+});
+
+after((done) => {
+  Event.deleteMany({}, (err) => {});
+  done();
+});
 
 /**
  * Test the GET route
