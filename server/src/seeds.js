@@ -1,15 +1,10 @@
 import * as dotenv from 'dotenv';
 import Event from './models/event.js';
-import dbConnect from './dbConnect.js';
+import connectDB from './db/connectDB.js';
 
 dotenv.config();
 
-const username = process.env.DB_USER;
-const password = process.env.DB_PASS;
-const cluster = process.env.DB_CLUSTER;
-const dbname = process.env.DB_NAME;
-
-dbConnect(username, password, cluster, dbname);
+connectDB();
 
 const seedEvents = [
   {
