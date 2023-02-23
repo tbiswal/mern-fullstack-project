@@ -4,7 +4,7 @@ const createEventPersistence = async ({ title, description, date }) => {
   const newEvent = new Event({ title, description, date });
   await newEvent.save();
 
-  return newEvent;
+  return newEvent.getPublicFields();
 };
 
 export default createEventPersistence;

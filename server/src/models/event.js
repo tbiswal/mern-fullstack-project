@@ -21,6 +21,15 @@ const eventSchema = new mongoose.Schema({
   },
 });
 
+eventSchema.methods.getPublicFields = function () {
+  return {
+    pubId: this.pubId,
+    title: this.title,
+    description: this.description,
+    date: this.date,
+  };
+};
+
 const Event = mongoose.model('Event', eventSchema);
 
 export default Event;
