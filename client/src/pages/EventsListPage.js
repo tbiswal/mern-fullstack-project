@@ -31,7 +31,7 @@ function EventsListPage() {
 
 EventsListPage.propTypes = [
   {
-    _id: PropTypes.string,
+    pubId: PropTypes.string,
     title: PropTypes.string,
     description: PropTypes.string,
     date: PropTypes.string,

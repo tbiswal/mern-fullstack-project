@@ -6,7 +6,7 @@ function EventsList({ events }) {
     <div>
       {events.map((event) => (
         // eslint-disable-next-line no-underscore-dangle
-        <div key={event._id}>
+        <div key={event.pubId}>
           <h3>{event.title}</h3>
           <p>{event.description.substring(0, 150)}</p>
           <p>{event.date}</p>
@@ -19,7 +19,7 @@ function EventsList({ events }) {
 
 EventsList.propTypes = [
   {
-    _id: PropTypes.string,
+    pubId: PropTypes.string,
     title: PropTypes.string,
     description: PropTypes.string,
     date: PropTypes.string,

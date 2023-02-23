@@ -1,6 +1,12 @@
 import mongoose from 'mongoose';
+import { nanoid } from 'nanoid';
 
 const eventSchema = new mongoose.Schema({
+  pubId: {
+    type: String,
+    required: true,
+    default: nanoid(),
+  },
   title: {
     type: String,
     required: true,
