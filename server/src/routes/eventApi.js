@@ -27,7 +27,7 @@ router.post(
       { title, description, date }
     );
 
-    res.send(newEvent);
+    res.status(201).send(newEvent);
   })
 );
 
