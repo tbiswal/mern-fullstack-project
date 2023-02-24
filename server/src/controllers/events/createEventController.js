@@ -1,16 +1,16 @@
-import createEventPersistence from '../../injectable/events/createEventPersistence.js';
+import createEventPersistence from '../../interfaces/events/createEventPersistence.js';
 import wrapAsync from '../../utils/wrapAsync.js';
-import CreateEventDTO from '../../dtos/events/CreateEventDTO.js';
+import EventDTO from '../../dtos/events/EventDTO.js';
 
 const createEvent =
   ({ createEventPersistence },
   wrapAsync(async (req, res) => {
     const { title, description, date } = req.body;
 
-    const eventDTO = new CreateEventDTO({ title, description, date });
+    const eventDTO = new EventDTO({ title, description, date });
     eventDTO.validate();
 
-    const newEvent = await createEventPersistence({ title, description, date });
+    const newEvent = await createEventPersistence(eventDTO);
     res.send(newEvent);
   }));
 

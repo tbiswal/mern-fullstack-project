@@ -1,4 +1,4 @@
-import fetchEventPersistence from '../../injectable/events/fetchEventPersistence.js';
+import fetchEventPersistence from '../../interfaces/events/fetchEventPersistence.js';
 import wrapAsync from '../../utils/wrapAsync.js';
 
 const fetchAllEvents =
