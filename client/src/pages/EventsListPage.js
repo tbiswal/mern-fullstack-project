@@ -9,12 +9,16 @@ const axiosInstance = axios.create({
 
 function EventsListPage() {
   const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
+
     const loadEvents = async () => {
       const response = await axiosInstance.get('/api/events');
       const eventInfo = response.data;
       setEvents(eventInfo);
+      setLoading(false);
     };
 
     loadEvents();
@@ -24,7 +28,7 @@ function EventsListPage() {
     <>
       <h1 className="display-1">Events</h1>
       <br />
-      <EventsList events={events} />
+      {loading ? <> Loading...</> : <EventsList events={events} />}
     </>
   );
 }
