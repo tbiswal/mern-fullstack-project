@@ -12,7 +12,9 @@ router.get(
   '/api/events',
   wrapAsync(async (req, res) => {
     const events = await fetchEventController({ fetchEventPersistence });
-    res.send(events);
+    setTimeout(() => {
+      res.send(events);
+    }, 1000);
   })
 );
 
