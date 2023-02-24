@@ -10,11 +10,18 @@ function CreateAccountPage() {
 
   const navigate = useNavigate();
 
-  const createAccount = async () => {
+  const submitHandler = async (event) => {
     try {
+      event.preventDefault();
+      const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+      if (!re.test(email)) {
+        setError('Invalid email address');
+        return;
+      }
+
       if (password !== confirmPassword) {
         setError('Password and confirm password do not match');
-        return;
       }
 
       await createUserWithEmailAndPassword(getAuth(), email, password);
@@ -25,16 +32,19 @@ function CreateAccountPage() {
   };
 
   return (
-    <>
+    <form onSubmit={submitHandler}>
       <h1>Create Account</h1>
       {error && <p className="error">{error}</p>}
       <input
+        type="email"
         placeholder="Your email address"
         value={email}
+        required
         onChange={(e) => setEmail(e.target.value)}
       />
       <input
         type="password"
+        required
         placeholder="Your password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
@@ -45,11 +55,9 @@ function CreateAccountPage() {
         value={confirmPassword}
         onChange={(e) => setConfirmPassword(e.target.value)}
       />
-      <button type="button" onClick={createAccount}>
-        Create Account
-      </button>
+      <button type="submit">Create Account</button>
       <Link to="/login">Already have an account? Log in here</Link>
-    </>
+    </form>
   );
 }
 
