@@ -11,10 +11,10 @@ const mongoDB = (dbConfig) => {
       useUNifiedTopology: true,
     })
     .then(() => {
-      console.log('CONNECION OPEN!');
+      console.log('CONNECTION OPEN!');
     })
     .catch((err) => {
-      console.log('CONNECION ERROR!');
+      console.log('CONNECTION ERROR!');
       console.log(err);
     });
 };
