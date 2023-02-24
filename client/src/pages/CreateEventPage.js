@@ -1,5 +1,8 @@
 import { React, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import axios from 'axios';
 import useUser from '../hooks/useUser';
 
@@ -11,7 +14,7 @@ function CreateEventPage() {
   const navigate = useNavigate();
   const [enteredTitle, setEnteredTitle] = useState('');
   const [enteredDescription, setEnteredDescription] = useState('');
-  const [enteredDate, setEnteredDate] = useState('');
+  const [enteredDate, setEnteredDate] = useState(moment().toDate());
   const { user } = useUser();
 
   const createEvent = async () => {
@@ -41,7 +44,13 @@ function CreateEventPage() {
         value={enteredDescription}
         onChange={(e) => setEnteredDescription(e.target.value)}
       />
-      <input type="date" value={enteredDate} onChange={(e) => setEnteredDate(e.target.value)} />
+      <DatePicker
+        wrapperClassName="datepicker"
+        selected={enteredDate}
+        onChange={(date) => setEnteredDate(date)}
+        minDate={moment().toDate()}
+      />
+
       {user ? (
         <button id="create-event-btn" onClick={createEvent} type="submit">
           Create Event
