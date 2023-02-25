@@ -30,15 +30,21 @@ const createSeeds = () => {
     },
   ];
 
-  Event.insertMany(seedEvents)
-    .then(() => {
-      console.log('Seeds created successfully!');
-    })
-    .catch((e) => {
-      console.log(e);
-    });
+  return new Promise((resolve, reject) => {
+    Event.insertMany(seedEvents)
+      .then(() => {
+        console.log('Seeds created successfully!');
+        resolve();
+      })
+      .catch((e) => {
+        console.log(e);
+        reject();
+      });
+  });
 };
 
-createSeeds();
+if (process.env.NODE_ENV === 'development') {
+  createSeeds();
+}
 
 export default createSeeds;

@@ -11,12 +11,19 @@ chai.should();
 chai.use(chaiHttp);
 
 before((done) => {
-  createSeeds();
-  done();
+  console.log('Started Before');
+  createSeeds()
+    .then(() => {
+      done();
+    })
+    .catch((e) => {
+      console.log('There is an error while seeding the test DB!');
+      console.log(e.message);
+    });
 });
 
 after((done) => {
-  Event.deleteMany({}, (err) => {});
+  Event.deleteMany({});
   done();
 });
 
@@ -24,6 +31,7 @@ after((done) => {
  * Test the GET route
  */
 describe('Test GET route /api/events', () => {
+  console.log('Here 11111');
   it('It should return all events', (done) => {
     chai
       .request(server)
@@ -40,6 +48,7 @@ describe('Test GET route /api/events', () => {
    * Test the POST route
    */
   describe('POST /api/events', () => {
+    console.log('Here 22222');
     it('It should POST a new event', (done) => {
       const event = {
         title: 'RapidFunnel Conference',
@@ -65,6 +74,7 @@ describe('Test GET route /api/events', () => {
     });
 
     it('It should NOT POST a new event without the title property', (done) => {
+      console.log('Here 3333');
       const event = {
         description: 'This is going to be an awesome event!',
         date: '2023-03-24T00:00:00.000Z',
