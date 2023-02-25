@@ -1,5 +1,5 @@
 import * as dotenv from 'dotenv';
-import Event from './models/event.js';
+import Event from './models/eventModel.js';
 import connectDB from './db/connectDB.js';
 
 dotenv.config();
@@ -31,8 +31,8 @@ const createSeeds = () => {
   ];
 
   Event.insertMany(seedEvents)
-    .then((res) => {
-      console.log(res);
+    .then(() => {
+      console.log('Seeds created successfully!');
     })
     .catch((e) => {
       console.log(e);

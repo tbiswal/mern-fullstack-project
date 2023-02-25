@@ -1,4 +1,4 @@
-import Event from '../../models/event.js';
+import Event from '../../models/eventModel.js';
 
 const createEventService = async (eventDTO) => {
   const newEvent = new Event(eventDTO);

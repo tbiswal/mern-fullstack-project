@@ -11,7 +11,7 @@ const createEvent =
     eventDTO.validate();
 
     const newEvent = await createEventPersistence(eventDTO);
-    res.send(newEvent);
+    res.status(201).send(newEvent);
   }));
 
 export default createEvent;

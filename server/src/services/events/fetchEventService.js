@@ -1,4 +1,4 @@
-import Event from '../../models/event.js';
+import Event from '../../models/eventModel.js';
 
 const fetchEventService = async () => {
   const events = await Event.find({}).sort({ _id: -1 });

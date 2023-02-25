@@ -1,7 +1,7 @@
 import { describe, it, before, after } from 'mocha';
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-import Event from '../src/models/event.js';
+import Event from '../src/models/eventModel.js';
 import server from '../src/server.js';
 import createSeeds from '../src/seeds.js';
 
