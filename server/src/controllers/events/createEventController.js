@@ -12,12 +12,10 @@ const createEvent =
       description,
       date,
     });
-    eventEntity.defaultEventEntity();
+    const eventData = eventEntity.defaultEventEntity();
     eventEntity.validate();
 
-    const newEvent = await createEventPersistence(
-      eventEntity.defaultEventEntity()
-    );
+    const newEvent = await createEventPersistence(eventData);
     res.status(201).send(newEvent);
   }));
 
