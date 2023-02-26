@@ -1,16 +1,21 @@
 import createEventPersistence from '../../interfaces/events/createEventPersistence.js';
 import wrapAsync from '../../utils/wrapAsync.js';
-import EventDTO from '../../dtos/events/EventDTO.js';
+import * as eventObject from '../../entities/events/eventEntity.js';
 
 const createEvent =
   ({ createEventPersistence },
   wrapAsync(async (req, res) => {
     const { title, description, date } = req.body;
 
-    const eventDTO = new EventDTO({ title, description, date });
-    eventDTO.validate();
+    eventObject.setDefaultEventEntity({
+      title,
+      description,
+      date,
+    });
+    const eventEntity = eventObject.defaultEventEntity();
+    eventObject.validate();
 
-    const newEvent = await createEventPersistence(eventDTO);
+    const newEvent = await createEventPersistence(eventEntity);
     res.status(201).send(newEvent);
   }));
 

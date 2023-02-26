@@ -4,6 +4,9 @@
   "description": "",
   "main": "server.js",
   "type": "module",
+  "engines": {
+    "node": ">=8.3.0"
+  },
   "scripts": {
     "start": "node src/server.js",
     "dev": "export NODE_ENV=development && nodemon src/server.js",
