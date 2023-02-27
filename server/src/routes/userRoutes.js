@@ -9,11 +9,4 @@ const userRouter = express.Router();
 userRouter.post('/api/users', registerUser);
 userRouter.post('/api/login', loginUser);
 
-userRouter.use((err, req, res, next) => {
-  const { status = 500, defaultMessage = 'Something went wrong!' } = err;
-  res.status(status).send({
-    message: err.message || defaultMessage,
-  });
-});
-
 export default userRouter;

@@ -13,6 +13,12 @@ app.use(express.json());
 app.use(morgan('tiny'));
 app.use(cors());
 app.use('/', [eventRouter, userRouter]);
+app.use((err, req, res, next) => {
+  const { status = 500, defaultMessage = 'Something went wrong!' } = err;
+  res.status(status).send({
+    message: err.message || defaultMessage,
+  });
+});
 
 connectDB();
 

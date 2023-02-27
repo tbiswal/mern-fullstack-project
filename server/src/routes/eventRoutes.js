@@ -11,11 +11,4 @@ authMiddleware();
 
 eventRouter.post('/api/events', createEvent);
 
-eventRouter.use((err, req, res, next) => {
-  const { status = 500, defaultMessage = 'Something went wrong!' } = err;
-  res.status(status).send({
-    message: err.message || defaultMessage,
-  });
-});
-
 export default eventRouter;
