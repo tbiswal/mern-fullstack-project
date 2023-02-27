@@ -1,7 +1,7 @@
-import eventModel from '../../models/eventModel.js';
+import Event from '../../models/eventModel.js';
 
 const createEventService = async (eventEntity) => {
-  const newEvent = new eventModel(eventEntity);
+  const newEvent = new Event(eventEntity);
   await newEvent.save();
 
   return newEvent.getPublicFields();
