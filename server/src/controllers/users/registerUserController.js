@@ -1,57 +1,65 @@
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 import User from '../../models/userModel.js';
 import wrapAsync from '../../utils/wrapAsync.js';
 import AppError from '../../utils/AppError.js';
 
-const registerUser = wrapAsync(async(req, res) => {
-  const {name, email, password} = req.body;
+const generateToken = (id) =>
+  jwt.sign({ id }, process.env.JWT_SECRET, {
+    expiresIn: '30d',
+  });
+
+const registerUser = wrapAsync(async (req, res) => {
+  const { name, email, password } = req.body;
 
   // Find if user already exists
-  const userExists = await User.findOne({email});
+  const userExists = await User.findOne({ email });
 
-  if(userExists) {
+  if (userExists) {
     throw new AppError('User already exists', 400);
   }
 
-  console.log(password);
-  //Hash password
+  // Hash password
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = password ? await bcrypt.hash(password, salt) : '';
 
   console.log(hashedPassword);
-  
+
   // Create user
   const user = await User.create({
     name,
     email,
-    password: hashedPassword
-  })
+    password: hashedPassword,
+  });
 
   if (user) {
     res.status(201).json({
       pubId: user.pubId,
       name: user.name,
       email: user.email,
+      token: generateToken(user.pubId),
     });
   } else {
     throw new AppError('Invalid user data', 400);
   }
 });
 
-const loginUser = wrapAsync(async(req, res) => {
-  const {email, password} = req.body;
+const loginUser = wrapAsync(async (req, res) => {
+  const { email, password } = req.body;
 
-  const aUser = await User.findOne({email});
+  const aUser = await User.findOne({ email });
 
   // Check user and password match
-  if(aUser && (await bcrypt.compare(password, aUser.password))) {
+  if (aUser && (await bcrypt.compare(password, aUser.password))) {
     res.status(200).json({
       pubId: aUser.pubId,
       name: aUser.name,
       email: aUser.email,
+      token: generateToken(aUser.pubId),
     });
   } else {
     throw new AppError('Invalid user credentials', 401);
   }
 });
-export {registerUser, loginUser};
+
+export { registerUser, loginUser };
