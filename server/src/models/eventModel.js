@@ -30,6 +30,4 @@ eventSchema.methods.getPublicFields = function () {
   };
 };
 
-const Event = mongoose.model('Event', eventSchema);
-
-export default Event;
+export default mongoose.model('Event', eventSchema);
