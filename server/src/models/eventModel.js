@@ -10,15 +10,15 @@ const eventSchema = new mongoose.Schema(
     },
     title: {
       type: String,
-      required: true,
+      required: [true, 'Please add a title'],
     },
     description: {
       type: String,
-      required: true,
+      required: [true, 'Please add a description'],
     },
     date: {
       type: Date,
-      required: true,
+      required: [true, 'Please add a date'],
     },
   },
   { timestamps: true }
