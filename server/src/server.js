@@ -3,7 +3,8 @@ import morgan from 'morgan';
 import cors from 'cors';
 import * as dotenv from 'dotenv';
 import connectDB from './db/connectDB.js';
-import router from './routes/eventRoutes.js';
+import eventRouter from './routes/eventRoutes.js';
+import userRouter from './routes/userRoutes.js';
 
 dotenv.config();
 
@@ -11,7 +12,7 @@ const app = express();
 app.use(express.json());
 app.use(morgan('tiny'));
 app.use(cors());
-app.use('/', router);
+app.use('/', [eventRouter, userRouter]);
 
 connectDB();
 
