@@ -1,6 +1,7 @@
 import bcrypt from 'bcryptjs';
 import User from '../../models/userModel.js';
 import wrapAsync from '../../utils/wrapAsync.js';
+import AppError from '../../utils/AppError.js';
 
 const registerUser = wrapAsync(async(req, res) => {
   const {name, email, password} = req.body;
@@ -9,8 +10,7 @@ const registerUser = wrapAsync(async(req, res) => {
   const userExists = await User.findOne({email});
 
   if(userExists) {
-    res.status(400);
-    throw new Error('User already exists');
+    throw new AppError('User already exists', 400);
   }
 
   console.log(password);
@@ -34,9 +34,24 @@ const registerUser = wrapAsync(async(req, res) => {
       email: user.email,
     });
   } else {
-    res.status(400);
-    throw new error('Invalid user data');
+    throw new AppError('Invalid user data', 400);
   }
 });
 
-export default registerUser;
+const loginUser = wrapAsync(async(req, res) => {
+  const {email, password} = req.body;
+
+  const aUser = await User.findOne({email});
+
+  // Check user and password match
+  if(aUser && (await bcrypt.compare(password, aUser.password))) {
+    res.status(200).json({
+      pubId: aUser.pubId,
+      name: aUser.name,
+      email: aUser.email,
+    });
+  } else {
+    throw new AppError('Invalid user credentials', 401);
+  }
+});
+export {registerUser, loginUser};
