@@ -24,6 +24,11 @@ function LoginPage() {
     }
 
     try {
+      /* 
+      getAuth is a function which returns FirebaseAuth object to manage user accounts and
+      credentials. signInWithEmailAndPassword signs in using provided email address and password.
+      An error is returned if the password is wrong or otherwise not accepted by the server.
+      */
       await signInWithEmailAndPassword(getAuth(), email, password);
       navigate('/create-event');
     } catch (e) {
