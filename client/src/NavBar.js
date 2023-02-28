@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { getAuth, signOut } from 'firebase/auth';
 import useUser from './hooks/useUser';
+import './NavBar.css';
 
 function NavBar() {
   const { user } = useUser();
