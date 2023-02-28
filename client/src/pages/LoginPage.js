@@ -8,21 +8,35 @@ function LoginPage() {
   const [error, setError] = useState('');
 
   const navigate = useNavigate();
+  const validateEmpty = (value) => value == null || value.length === 0 || value === undefined;
 
-  const login = async () => {
+  const submitHandler = async (event) => {
+    event.preventDefault();
+
+    if (validateEmpty(email)) {
+      setError('Email required');
+      return;
+    }
+
+    if (validateEmpty(password)) {
+      setError('Password required');
+      return;
+    }
+
     try {
       await signInWithEmailAndPassword(getAuth(), email, password);
       navigate('/create-event');
     } catch (e) {
-      setError(e.message);
+      setError('Invalid user credential');
     }
   };
 
   return (
-    <>
+    <form onSubmit={submitHandler}>
       <h1>Log In</h1>
       {error && <p className="error">{error}</p>}
       <input
+        type="email"
         placeholder="Your email address"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
@@ -33,9 +47,9 @@ function LoginPage() {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button type="button" onClick={login}>Log IN</button>
+      <button type="submit">Log In</button>
       <Link to="/create-account">Don&apos;t have an account? Create one here</Link>
-    </>
+    </form>
   );
 }
 

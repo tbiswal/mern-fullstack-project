@@ -11,11 +11,14 @@ const axiosInstance = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
 });
 
+const validateEmpty = (value) => value == null || value.length === 0 || value === undefined;
+
 function CreateEventPage() {
   const navigate = useNavigate();
   const [enteredTitle, setEnteredTitle] = useState('');
   const [enteredDescription, setEnteredDescription] = useState('');
   const [enteredDate, setEnteredDate] = useState(moment().toDate());
+  const [error, setError] = useState('');
   const { user } = useUser();
 
   const createEvent = async () => {
@@ -24,6 +27,16 @@ function CreateEventPage() {
       description: enteredDescription,
       date: enteredDate,
     };
+
+    if (validateEmpty(enteredTitle)) {
+      setError('Title required');
+      return;
+    }
+
+    if (validateEmpty(enteredDescription)) {
+      setError('Description required');
+      return;
+    }
 
     const token = user && (await user.getIdToken());
     const headers = token ? { authtoken: token } : {};
@@ -35,6 +48,7 @@ function CreateEventPage() {
   return (
     <>
       <h1>Create Event</h1>
+      {error && <p className="error">{error}</p>}
       <input
         placeholder="Event Title"
         value={enteredTitle}
