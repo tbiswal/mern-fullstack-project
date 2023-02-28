@@ -4,8 +4,8 @@ import User from '../../models/userModel.js';
 import wrapAsync from '../../utils/wrapAsync.js';
 import AppError from '../../utils/AppError.js';
 
-const generateToken = (id) =>
-  jwt.sign({ id }, process.env.JWT_SECRET, {
+const generateToken = (pubId) =>
+  jwt.sign({ pubId }, process.env.JWT_SECRET, {
     expiresIn: '30d',
   });
 
@@ -22,8 +22,6 @@ const registerUser = wrapAsync(async (req, res) => {
   // Hash password
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = password ? await bcrypt.hash(password, salt) : '';
-
-  console.log(hashedPassword);
 
   // Create user
   const user = await User.create({
