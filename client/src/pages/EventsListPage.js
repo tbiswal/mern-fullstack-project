@@ -15,6 +15,7 @@ function EventsListPage() {
     setLoading(true);
 
     const loadEvents = async () => {
+      // Todo - Move axios into a file and call that function
       const response = await axiosInstance.get('/api/events');
       const eventInfo = response.data;
       setEvents(eventInfo);

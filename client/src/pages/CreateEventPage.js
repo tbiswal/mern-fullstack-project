@@ -39,6 +39,8 @@ function CreateEventPage() {
     }
 
     const token = user && (await user.getIdToken());
+
+    // Todo - Validate token in frontend and redirect to login
     const headers = token ? { authtoken: token } : {};
 
     await axiosInstance.post('/api/events', eventData, { headers });

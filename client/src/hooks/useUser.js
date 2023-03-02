@@ -10,6 +10,7 @@ const useUser = () => {
       getAuth is a function which returns FirebaseAuth object to manage user accounts and
       credentials. onAuthStateChanged adds an observer for changes to the user's sign-in state
       */
+     // Todo - check how firebase stores the data in local storage
     const unsubscribe = onAuthStateChanged(getAuth(), (data) => {
       setUser(data);
     });
