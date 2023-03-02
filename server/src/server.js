@@ -15,9 +15,15 @@ app.use('/', router);
 
 // Handle errors
 app.use((err, req, res, next) => {
-  const { status = 500, defaultMessage = 'Something went wrong!' } = err;
+  const {
+    status = 200,
+    defaultHttpCode = 500,
+    defaultMessage = 'Something went wrong!',
+  } = err;
+
   res.status(status).send({
-    message: err.message || defaultMessage,
+    httpCode: err.httpCode || defaultHttpCode,
+    error: err.message || defaultMessage,
   });
 });
 
