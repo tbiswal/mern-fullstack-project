@@ -1,4 +1,5 @@
 import { React, useState } from 'react';
+import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
 import DatePicker from 'react-datepicker';
@@ -13,13 +14,16 @@ const axiosInstance = axios.create({
 
 const validateEmpty = (value) => value == null || value.length === 0 || value === undefined;
 
-function CreateEventPage() {
+function CreateEventPage(props) {
   const navigate = useNavigate();
   const [enteredTitle, setEnteredTitle] = useState('');
   const [enteredDescription, setEnteredDescription] = useState('');
   const [enteredDate, setEnteredDate] = useState(moment().toDate());
   const [error, setError] = useState('');
   const { user } = useUser();
+
+  // onCreated is a function supplied from parent component called EventList
+  const { onCreated } = props;
 
   const createEvent = async () => {
     const eventData = {
@@ -44,7 +48,10 @@ function CreateEventPage() {
     const headers = token ? { authtoken: token } : {};
 
     await axiosInstance.post('/api/events', eventData, { headers });
-    navigate('/event-list');
+    onCreated(true);
+    setEnteredTitle('');
+    setEnteredDescription('');
+    setEnteredDate(moment().toDate());
   };
 
   return (
@@ -85,5 +92,11 @@ function CreateEventPage() {
     </>
   );
 }
+
+CreateEventPage.propTypes = [
+  {
+    onEdit: PropTypes.string,
+  },
+];
 
 export default CreateEventPage;

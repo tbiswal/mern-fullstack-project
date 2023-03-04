@@ -2,6 +2,8 @@ import { React, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import EventsList from '../components/EventsList';
+import CreateEventPage from './CreateEventPage';
+import HorizontalLine from '../components/HorizontalLine';
 
 const axiosInstance = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
@@ -10,6 +12,13 @@ const axiosInstance = axios.create({
 function EventsListPage() {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [eventCreatedFlag, setEventCreatedFlag] = useState(false);
+
+  // Pass this handler to child component and set the flag
+  // Child to parent argument communication
+  const createEventHandler = (flag) => {
+    setEventCreatedFlag(flag);
+  };
 
   useEffect(() => {
     setLoading(true);
@@ -20,14 +29,17 @@ function EventsListPage() {
       const eventInfo = response.data;
       setEvents(eventInfo);
       setLoading(false);
+      setEventCreatedFlag(false);
     };
 
     loadEvents();
-  }, []);
+  }, [eventCreatedFlag]);
 
   return (
     <>
-      <h1 className="display-1">Events</h1>
+      <CreateEventPage onCreated={createEventHandler} />
+      <HorizontalLine />
+      <h1>List Of Events...</h1>
       <br />
       {loading ? <> Loading...</> : <EventsList events={events} />}
     </>

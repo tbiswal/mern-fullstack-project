@@ -17,9 +17,6 @@ function NavBar() {
         <li>
           <Link to="/event-list">Events</Link>
         </li>
-        <li>
-          <Link to="/create-event">Create Event</Link>
-        </li>
       </ul>
       <div className="nav-right">
         {user ? (

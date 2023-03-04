@@ -30,7 +30,7 @@ function LoginPage() {
       An error is returned if the password is wrong or otherwise not accepted by the server.
       */
       await signInWithEmailAndPassword(getAuth(), email, password);
-      navigate('/create-event');
+      navigate('/event-list');
     } catch (e) {
       setError('Invalid user credential');
     }
