@@ -1,7 +1,8 @@
-.HomePage h1, h3{
+.HomePage h1,
+.HomePage h3 {
   text-align: center;
 }
 
-.HomePage p{
+.HomePage p {
   text-align: justify;
 }
