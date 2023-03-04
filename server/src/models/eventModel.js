@@ -6,7 +6,8 @@ const eventSchema = new mongoose.Schema(
     pubId: {
       type: String,
       required: true,
-      default: nanoid(),
+      default: () => nanoid(),
+      index: { unique: true },
     },
     title: {
       type: String,
