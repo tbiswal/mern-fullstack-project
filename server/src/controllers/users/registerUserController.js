@@ -42,22 +42,4 @@ const registerUser = wrapAsync(async (req, res) => {
   }
 });
 
-const loginUser = wrapAsync(async (req, res) => {
-  const { email, password } = req.body;
-
-  const aUser = await User.findOne({ email });
-
-  // Check user and password match
-  if (aUser && (await bcrypt.compare(password, aUser.password))) {
-    res.status(200).json({
-      pubId: aUser.pubId,
-      name: aUser.name,
-      email: aUser.email,
-      token: generateToken(aUser.pubId),
-    });
-  } else {
-    throw new AppError('Invalid user credentials', 401);
-  }
-});
-
-export { registerUser, loginUser };
+export default registerUser;
