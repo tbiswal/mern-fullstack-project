@@ -20,6 +20,20 @@ app.use((err, req, res, next) => {
   });
 });
 
+// Handle errors
+app.use((err, req, res, next) => {
+  const {
+    status = 200,
+    defaultHttpCode = 500,
+    defaultMessage = 'Something went wrong!',
+  } = err;
+
+  res.status(status).send({
+    httpCode: err.httpCode || defaultHttpCode,
+    error: err.message || defaultMessage,
+  });
+});
+
 connectDB();
 
 const PORT = process.env.PORT || 8000;

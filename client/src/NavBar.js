@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { getAuth, signOut } from 'firebase/auth';
 import useUser from './hooks/useUser';
+import './NavBar.css';
 
 function NavBar() {
   const { user } = useUser();
@@ -15,9 +16,6 @@ function NavBar() {
         </li>
         <li>
           <Link to="/event-list">Events</Link>
-        </li>
-        <li>
-          <Link to="/create-event">Create Event</Link>
         </li>
       </ul>
       <div className="nav-right">

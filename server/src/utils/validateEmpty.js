@@ -1,11 +1,4 @@
-const validateEmpty = (value) => {
-  let result = false;
-
-  if (value == null || value.length === 0 || value === undefined) {
-    result = true;
-  }
-
-  return result;
-};
+const validateEmpty = (value) =>
+  value == null || value.length === 0 || value === undefined;
 
 export default validateEmpty;

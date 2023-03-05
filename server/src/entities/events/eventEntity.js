@@ -14,14 +14,14 @@ export function setDefaultEventEntity(arg) {
 
 export function validate() {
   if (validateEmpty(eventEntity.title)) {
-    throw new AppError('title required', 401);
+    throw new AppError('title required', 400);
   }
 
   if (validateEmpty(eventEntity.description)) {
-    throw new AppError('description required', 401);
+    throw new AppError('description required', 400);
   }
 
   if (validateEmpty(eventEntity.date)) {
-    throw new AppError('date required', 401);
+    throw new AppError('date required', 400);
   }
 }

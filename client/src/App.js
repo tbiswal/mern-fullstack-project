@@ -6,7 +6,6 @@ import HomePage from './pages/HomePage';
 import EventsListPage from './pages/EventsListPage';
 import NavBar from './NavBar';
 import NotFoundPage from './pages/NotFoundPage';
-import CreateEventPage from './pages/CreateEventPage';
 import LoginPage from './pages/LoginPage';
 import CreateAccountPage from './pages/CreateAccountPage';
 
@@ -19,7 +18,6 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/event-list" element={<EventsListPage />} />
-            <Route path="/create-event" element={<CreateEventPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/create-account" element={<CreateAccountPage />} />
             <Route path="*" element={<NotFoundPage />} />

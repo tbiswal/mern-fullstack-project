@@ -16,6 +16,7 @@ const authMiddleware = () => {
   router.use(async (req, res, next) => {
     const { authtoken } = req.headers;
 
+    // using auth token extract user details after verification
     if (authtoken) {
       try {
         req.user = (await admin.auth().verifyIdToken(authtoken)) || {};
