@@ -17,11 +17,11 @@ GoalInput = (props) => {
     <View style={styles.inputContainer}>
       <TextInput
         style={styles.textInput}
-        placeholder="Your course goal!"
+        placeholder="Your event name!"
         onChangeText={goalInputHandler}
         value={enteredGoalText}
       ></TextInput>
-      <Button title="Add Goal" onPress={addGoalHandler} />
+      <Button title="Add Event" onPress={addGoalHandler} />
     </View>
   );
 };
