@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "Tan App",
-    "slug": "tan-app",
-    "version": "1.0.0",
+    "name": "Event Management System By Tan",
+    "slug": "event-management-system-by-tan",
+    "version": "3.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -29,6 +29,7 @@
       "eas": {
         "projectId": "f9b45914-5993-4848-bc98-a2282fa74580"
       }
-    }
+    },
+    "owner": "tanbiswal"
   }
 }
